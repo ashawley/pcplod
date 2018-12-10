@@ -15,14 +15,14 @@ class NoddyPcSpec extends FlatSpec with Logging {
   "@noddy" should "handle definitions of @noddy" in withMrPlod("classes.scala") { mr: MrPlod =>
     mr.messages shouldBe Nil
 
-    mr.symbolAtPoint('me) shouldBe Some("org.ensime.pctesting.Me")
-    mr.typeAtPoint('me) shouldBe Some("org.ensime.pctesting.Me")
+    mr.symbolAtPoint(sym"me") shouldBe Some("org.ensime.pctesting.Me")
+    mr.typeAtPoint(sym"me") shouldBe Some("org.ensime.pctesting.Me")
 
-    mr.symbolAtPoint('myself) shouldBe Some("org.ensime.pctesting.Myself")
-    mr.typeAtPoint('myself) shouldBe Some("org.ensime.pctesting.Myself")
+    mr.symbolAtPoint(sym"myself") shouldBe Some("org.ensime.pctesting.Myself")
+    mr.typeAtPoint(sym"myself") shouldBe Some("org.ensime.pctesting.Myself")
 
-    mr.symbolAtPoint('foo) shouldBe Some("org.ensime.pctesting.Myself.foo")
-    mr.typeAtPoint('foo) shouldBe Some("String")
+    mr.symbolAtPoint(sym"foo") shouldBe Some("org.ensime.pctesting.Myself.foo")
+    mr.typeAtPoint(sym"foo") shouldBe Some("String")
   }
 
 }

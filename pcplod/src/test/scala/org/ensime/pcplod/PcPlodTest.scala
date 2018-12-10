@@ -25,22 +25,22 @@ class PcPlodTest extends FlatSpec with Logging {
   }
 
   "Mr Plod" should "typecheck a compilable valid noddy file" in withMrPlod("com/acme/foo.scala") { mr =>
-    mr.symbolAtPoint('foo) shouldBe Some("com.acme.Foo")
-    mr.typeAtPoint('foo) shouldBe Some("com.acme.Foo.type")
+    mr.symbolAtPoint(sym"foo") shouldBe Some("com.acme.Foo")
+    mr.typeAtPoint(sym"foo") shouldBe Some("com.acme.Foo.type")
 
-    mr.symbolAtPoint('bar) shouldBe Some("com.acme.Foo.bar")
-    mr.typeAtPoint('bar) shouldBe Some("Int")
+    mr.symbolAtPoint(sym"bar") shouldBe Some("com.acme.Foo.bar")
+    mr.typeAtPoint(sym"bar") shouldBe Some("Int")
 
-    mr.symbolAtPoint('a) shouldBe Some("com.acme.Foo.a")
-    mr.typeAtPoint('a) shouldBe Some("Int")
+    mr.symbolAtPoint(sym"a") shouldBe Some("com.acme.Foo.a")
+    mr.typeAtPoint(sym"a") shouldBe Some("Int")
 
     mr.messages shouldBe empty
   }
 
   "Mr Plod" should "typecheck an uncompilable valid noddy file" in withMrPlod("com/acme/foo_bad.scala") { mr =>
-    mr.typeAtPoint('foo) shouldBe Some("com.acme.Foo.type")
+    mr.typeAtPoint(sym"foo") shouldBe Some("com.acme.Foo.type")
 
-    mr.typeAtPoint('input_a) should matchPattern {
+    mr.typeAtPoint(sym"input_a") should matchPattern {
       case Some("<error>")  => // scala 2.11
       case Some("<notype>") => // scala 2.10
     }
